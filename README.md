@@ -38,7 +38,7 @@ pip install tensorflow streamlit numpy pillow
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/arpy8/Plant_Disease_Detection_using_CNN.git
+   git clone https://github.com/arpy8/Plant_Disease_Detection.git
    cd Plant_Disease_Detection_using_CNN
    ```
 
@@ -60,15 +60,9 @@ pip install tensorflow streamlit numpy pillow
 │
 └── assets             <- Folder containing the assets for the web app
 │   ├── bg.png         <- Background image
-    │
+│   ├── logo.png       <- Logo image
 │   └── sample         <- Contains random image from the dataset for the web app
 │
-├── data               <- Datasets used and collected for this project
-│   ├── Test           <- Contains the testing set
-│   │
-│   ├── Train          <- Contains the training set
-│   │
-│   └── Validation     <- Contains the validation set
 │
 ├── notebook           <- Folder containing the notebook used for training the CNN model
 │   └── Plant-Disease-Detection-using-CNN.ipynb      <- Contains the model weights
