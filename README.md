@@ -2,6 +2,15 @@
 
 This repository contains an implementation of plant disease detection using a Convolutional Neural Network (CNN) built from scratch. The repository also contains a web app allowing users to upload an image of a plant and the CNN model predicts whether the plant is healthy or if it is affected by powdery mildew or rust.
 
+---
+
+### NOTE: 
+
+I was unable to upload the weight files because of a Git LFS problem (repository exceeded its data quota. 😔)
+However if you still wish to download the weights, you can do that using this [link](https://www.mediafire.com/file/1j3dwd2pzs7xc13/weights.rar/file). 👍
+
+---
+
 ## Table of Contents
 
 - [Introduction](#introduction)
