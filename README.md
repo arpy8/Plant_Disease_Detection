@@ -4,10 +4,16 @@ This repository contains an implementation of plant disease detection using a Co
 
 ---
 
-### NOTE: 
+  
+### Few Important Links:
 
-I was unable to upload the weight files because of a Git LFS problem (repository exceeded its data quota. 😔)
-However if you still wish to download the weights, you can do that using this [link](https://www.mediafire.com/file/1j3dwd2pzs7xc13/weights.rar/file). 👍
+- Model Weights:	
+	- [https://www.mediafire.com/file/1j3dwd2pzs7xc13/weights.rar/file](https://www.mediafire.com/file/1j3dwd2pzs7xc13/weights.rar/file).
+- Deployed App Link:
+	-  [https://plant-disease-detection-pkue.onrender.com/](https://plant-disease-detection-pkue.onrender.com/)
+- Model API Link: 
+	- [https://arpy8-plant-detection-api.hf.space/docs](https://arpy8-plant-detection-api.hf.space/docs)
+
 
 ---
 
