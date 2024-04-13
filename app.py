@@ -1,28 +1,41 @@
 import base64
-import time
+import requests
 import constants
-import numpy as np
-import streamlit as st
-import tensorflow as tf
 from PIL import Image
+import streamlit as st
+
+API_URL = "https://arpy8-plant-detection-api.hf.space/predict"
 
 
-model = tf.keras.models.load_model(constants.MODEl_PATH)
+# def predict_class(image_path):
+#     original_image = Image.open(image_path)
+
+#     preprocessed_image = original_image.resize((256, 256))
+#     preprocessed_image = np.array(preprocessed_image) / 255.0
+
+#     preds = model.predict(np.expand_dims(preprocessed_image, axis = 0))
+#     labels = ['Healthy', 'Powdery', 'Rust']
+
+#     preds_class = np.argmax(preds)
+#     preds_label = labels[preds_class]
+
+#     return preds_label, round(preds[0][preds_class], 2)
 
 
-def predict_class(image_path):
-    original_image = Image.open(image_path)
+def predict_class_from_api(image_path):
+    files = {'file': image_path}
+    headers = {'accept': 'application/json'}
 
-    preprocessed_image = original_image.resize((256, 256))
-    preprocessed_image = np.array(preprocessed_image) / 255.0
-
-    preds = model.predict(np.expand_dims(preprocessed_image, axis = 0))
-    labels = ['Healthy', 'Powdery', 'Rust']
-
-    preds_class = np.argmax(preds)
-    preds_label = labels[preds_class]
-
-    return preds_label, round(preds[0][preds_class], 2)
+    try:
+        response = requests.post(API_URL, headers=headers, files=files)
+        response.raise_for_status()
+        result = response.json()
+        
+        return result
+        
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        return "Error", 0.0
 
 ################## STREAMLIT APP ##################
 
@@ -46,7 +59,7 @@ def set_png_as_page_bg(png_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
     return
 
-set_png_as_page_bg('assets/bg.png')
+set_png_as_page_bg('assets/bg.webp')
 
 st.write("<h1>Plant Disease Detection using CNN</h1>", unsafe_allow_html=True)
 
@@ -70,35 +83,25 @@ display_image = st.empty()
 classifying_text = st.empty()
 button = st.empty()    
 
-# use_sample_image = st.checkbox("Use example image", value = False)
-
-# if use_sample_image:
-#     display_image.image(f'sample/{random.randint(1,10)}.jpg')
-#     uploaded_file = True
-
-
 if uploaded_file is not None:
     home_page.empty()
-    display_image.image(uploaded_file)
+    display_image.image(uploaded_file, width=450)
     
     predict_button = button.button("Predict", use_container_width=True)
 
     if predict_button and uploaded_file is not None: 
         classifying_text.empty()
         button.empty()
-        label, confidence = predict_class(uploaded_file)
-        
-        loading_bar = st.empty()
-        loading_bar.write("Classifying...")
-        progress_text = "Please wait, we're predicting the image..."
-        my_bar = loading_bar.progress(0, text=progress_text)
+        with st.spinner("Predicting..."):
+            label = predict_class_from_api(uploaded_file)
 
-        for percent_complete in range(100):
-            time.sleep(0.01)
-            my_bar.progress(percent_complete + 1, text=progress_text)
-
-        my_bar.empty()
         st.toast("Prediction Complete!")
-        st.info(f"##### Prediction: {label}\n##### Confidence: {confidence}")
+        st.info(f"""
+##### Predicted Class:
+{label}
+
+##### Description: 
+{constants.DISEASE_DESCRIPTION[label]}
+        """)
 
     classifying_text.empty()

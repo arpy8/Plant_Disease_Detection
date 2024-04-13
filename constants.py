@@ -30,3 +30,9 @@ FRONT_PAGE = """
     <p>Thank you for using the "Plant Disease Detection using CNN" web app!</p>
 </body>
 """
+
+DISEASE_DESCRIPTION = {
+    "Healthy": "Your plant appears to be healthy! Keep up the good work with your plant care routine to maintain its health and vitality. Regular watering, proper sunlight exposure, and monitoring for pests and diseases can help your plant thrive.",
+    "Powdery": "Powdery mildew is a fungal disease that affects a wide range of plants, including fruits, vegetables, and ornamental plants. It appears as a white or gray powdery growth on the leaves, stems, and flowers of infected plants. Powdery mildew can weaken the plant, reduce fruit yield, and affect the overall health of the plant. It is important to treat powdery mildew early to prevent its spread and protect the plant from further damage.",
+    "Rust": "Rust is a common plant disease caused by various fungi. It appears as orange, yellow, or reddish-brown pustules on the leaves, stems, or fruit of infected plants. Rust can weaken the plant, reduce photosynthesis, and affect the overall health of the plant. It is important to treat rust early to prevent its spread and protect the plant from further damage.",
+}
